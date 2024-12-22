@@ -1,83 +1,82 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
+#define n 100
 
-#define MAX 5
+class Stack{
+  int* arr; 
+  int top;
 
-class Stack {
-private:
-    int arr[MAX]; 
-    int top;
+  public:
+  Stack(){
+    arr = new int[n];
+    top = -1;
+  }
 
-public:
-    Stack() { 
-        top = -1; 
+  ~Stack(){
+    delete [] arr;
+  }
+
+  void push(int x){
+    if (top == n-1){
+      cout<<"Stack Overflow"<<endl;
+      return; 
     }
+    top++;
+    arr[top] = x;
+  }
 
-    void push(int value) {
-        if (top >= MAX - 1) {
-            cout << "Stack Overflow! Cannot push " << value << endl;
-        } else {
-            top++;
-            arr[top] = value;
-            cout << value << " pushed into the stack." << endl;
-        }
+  void pop(){
+    if (top == -1){
+      cout<<"No elements in stack to pop"<<endl;
+      return;
     }
+    top--;
+  }
 
-    void pop() {
-        if (top < 0) {
-            cout << "Stack Underflow! No element to pop." << endl;
-        } else {
-            cout << arr[top] << " popped from the stack." << endl;
-            top--;
-        }
+  void peek(){
+    if (top == -1){
+      cout<<"Stack is empty, nothing to peek"<<endl;
+      return;
     }
+    cout<<"Element at the top: "<<arr[top]<<endl;
+  }
 
-    int peek() {
-        if (top < 0) {
-            cout << "Stack is empty!" << endl;
-            return -1;
-        } else {
-            return arr[top];
-        }
-    }
+  bool isEmpty(){
+    return top == -1;
+  }
 
-    bool isEmpty() {
-        return (top < 0);
+  void display_stack(){
+    if (top == -1){
+      cout<<"Stack is empty"<<endl;
+      return;
     }
+    
+    cout<<"All Stack Elements: ";
+    for (int i=0; i<=top; i++){
+      cout<<arr[i]<<' ';
+    } 
+  }
 
-    void display() {
-        if (top < 0) {
-            cout << "Stack is empty!" << endl;
-        } else {
-            cout << "Stack elements: ";
-            for (int i = 0; i <= top; i++) {
-                cout << arr[i] << " ";
-            }
-            cout << endl;
-        }
-    }
 };
 
-int main() {
-    Stack s;
+int main(){
+  Stack st;
+  st.push(11);
+  st.push(22);
+  st.push(33);
+  st.peek();
 
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    s.push(40);
-    s.push(50);
-    s.push(60); 
+  st.pop();
+  st.peek();
 
-    s.display();
+  cout<<st.isEmpty()<<endl;
 
-    cout << "Top element is: " << s.peek() << endl;
+  st.peek();
+  cout<<st.isEmpty()<<endl;
 
-    s.pop();
-    s.pop();
+  st.push(111);
+  st.push(222);
+  st.push(333);
+  st.display_stack();
 
-    s.display();
-
-    cout << "Is stack empty? " << (s.isEmpty() ? "Yes" : "No") << endl;
-
-    return 0;
 }
