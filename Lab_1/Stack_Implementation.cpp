@@ -2,13 +2,15 @@
 using namespace std;
 #define n 100
 
+template<class T>
+
 class Stack{
-  int* arr; 
+  T* arr; 
   int top;
 
   public:
   Stack(){
-    arr = new int[n];
+    arr = new T[n];
     top = -1;
   }
 
@@ -16,7 +18,7 @@ class Stack{
     delete [] arr;
   }
 
-  void push(int x){
+  void push(T x){
     if (top == n-1){
       cout<<"Stack Overflow"<<endl;
       return; 
@@ -55,12 +57,13 @@ class Stack{
     for (int i=0; i<=top; i++){
       cout<<arr[i]<<' ';
     } 
+    cout<<endl;
   }
 
 };
 
 int main(){
-  Stack st;
+  Stack<int> st;
   st.push(11);
   st.push(22);
   st.push(33);
@@ -79,4 +82,17 @@ int main(){
   st.push(333);
   st.display_stack();
 
+  // Using Stack with string type
+  Stack<double> st_double;
+  st_double.push(1.1);
+  st_double.push(2.2);
+  st_double.push(3.3);
+  st_double.display_stack();
+
+  // Using Stack with string type
+  Stack<string> st_string;
+  st_string.push("Stack");
+  st_string.push("Implementation");
+  st_string.push("using Template Class");
+  st_string.display_stack();
 }
